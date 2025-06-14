@@ -1,25 +1,36 @@
-const profile = {
-  username: "Jacob",
-  playTime: 300,
+class StringBuilder {
+  constructor(initialValue) {
+    this.#value = initialValue;
+  }
 
-  changeUsername(newName) {
-    this.username = newName;
-  },
+  #value;
 
-  updatePlayTime(hours) {
-    this.playTime += hours;
-  },
+  getValue() {
+    return this.#value;
+  }
 
-  getInfo() {
-    return `${this.username} has ${this.playTime} active hours!`;
-  },
-};
+  padEnd(str) {
+    this.#value += str;
+  }
 
-// Залиш цей код для перевірки ментором
-console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+  padStart(str) {
+    this.#value = str + this.#value;
+  }
 
-profile.changeUsername("Marco");
-console.log(profile.getInfo()); // "Marco has 300 active hours!"
+  padBoth(str) {
+    this.#value = str + this.#value + str;
+  }
+}
 
-profile.updatePlayTime(20);
-console.log(profile.getInfo()); // "Marco has 320 active hours!"
+// Перевірка роботи
+const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="
